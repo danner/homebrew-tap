@@ -3,7 +3,7 @@ class Ardour < Formula
   homepage "https://ardour.org/"
   url "https://github.com/Ardour/ardour/archive/refs/tags/8.6.tar.gz"
   version "8.6"
-  sha256 "482846caa27df5c966e3f3b755ffe788f40ed600abcb7cd1f0767f7e5fc535cb" # Replace with actual SHA256 hash of the 8.6 tarball
+  sha256 "84d79d73d749cf05a223feb74d5fdfcacfef520e185169752e33fb9bfcbce7b3" # Replace with actual SHA256 hash of the 8.6 tarball
   head "https://github.com/Ardour/ardour.git", branch: "8.6"
 
   depends_on "pkg-config" => :build
