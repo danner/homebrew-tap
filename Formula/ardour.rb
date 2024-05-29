@@ -30,13 +30,17 @@ class Ardour < Formula
   depends_on "vamp-plugin-sdk"
 
   def install
-    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
-    system "./waf"
-    system "./waf", "install"
+    # Check if .waf is available before executing waf commands
+    waf_path = "./waf"
+    if !File.executable?(waf_path)
+      odie ".waf is not available. Please make sure it is installed and accessible."
+    end
+    
+    system waf_path, "configure", "--prefix=#{prefix}", "--with-backends=jack"
+    system waf_path, "install"
 
-    # The following block may not be necessary unless specific macOS packaging steps are required
     cd "./tools/osx_packaging" do
-      system "./osx_build", "--help"
+      system waf_path, "--help"
     end
   end
 
