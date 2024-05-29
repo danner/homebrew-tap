@@ -3,7 +3,7 @@ class Ardour < Formula
   homepage "https://ardour.org/"
   url "https://github.com/Ardour/ardour.git",
       tag: "8.6",
-      revision: "0aefb67766ff3b8ee8c68dd3d75bda96048b43b9"
+      revision: "dde59c8e4cd6629ea05241a0cd35d34c26b20202"
 
 
   depends_on "aubio"
