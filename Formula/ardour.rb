@@ -1,9 +1,7 @@
 class Ardour < Formula
   desc "A digital audio workstation"
   homepage "https://ardour.org/"
-  url "https://github.com/Ardour/ardour.git",
-      tag: "8.6",
-      revision: "dde59c8e4cd6629ea05241a0cd35d34c26b20202"
+  url "https://github.com/danner/ardour.git"
 
 
   depends_on "aubio"
@@ -31,11 +29,7 @@ class Ardour < Formula
     
   def install
     # Clone Ardour repository
-    system "git", "clone", "https://github.com/Ardour/ardour.git", "source"
-    # Switch to the specific tag
-    Dir.chdir("source") do
-      system "git", "checkout", "8.6"
-    end
+    system "git", "clone", "https://github.com/danner/ardour.git", "source"
 
     # Build Ardour
     cd "source" do
