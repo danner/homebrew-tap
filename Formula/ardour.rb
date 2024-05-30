@@ -34,6 +34,9 @@ class Ardour < Formula
     system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
     system "./waf"
 
+    # Internationalization support
+    system "./waf", "i18n"
+
     # Install Ardour
     system "./waf", "install", "--destdir=#{prefix}"
 
