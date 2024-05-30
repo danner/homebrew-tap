@@ -1,7 +1,7 @@
 class Ardour < Formula
   desc "A digital audio workstation"
   homepage "https://ardour.org/"
-  url "https://github.com/danner/ardour.git"
+  head "https://github.com/danner/ardour.git", branch: "master"
 
 
   depends_on "aubio"
@@ -47,7 +47,7 @@ class Ardour < Formula
   end
 
   test do
-    # Verify the version of the installed Ardour
-    assert_match "Ardour 8.6", shell_output("#{bin}/ardour8 --version")
+    # Verify the installation by checking the version
+    assert_match "Ardour", shell_output("#{bin}/ardour --version")
   end
 end
