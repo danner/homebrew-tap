@@ -27,27 +27,28 @@ class Ardour < Formula
   depends_on "taglib"
   depends_on "vamp-plugin-sdk"
 
-def install
-  # Clone Ardour repository is handled by `head`
+  def install
+    # Clone Ardour repository is handled by `head`
 
-  # Build Ardour
-  system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
-  system "./waf"
+    # Build Ardour
+    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
+    system "./waf"
 
-  # Install Ardour
-  system "./waf", "install", "--destdir=#{prefix}"
+    # Install Ardour
+    system "./waf", "install", "--destdir=#{prefix}"
 
-  # Create .app bundle
-  cd "tools/osx_packaging" do
-    system "./osx_build", "--public"
+    # Create .app bundle
+    cd "tools/osx_packaging" do
+      system "./osx_build", "--public"
+    end
+
+    # Move the .app bundle to the prefix directory
+    app_bundle = Dir.glob("tools/osx_packaging/*.app").first
+    prefix.install app_bundle if app_bundle
   end
 
-  # Move the .app bundle to the prefix directory
-  app_bundle = Dir.glob("tools/osx_packaging/*.app").first
-  prefix.install app_bundle if app_bundle
-end
-
-test do
-  # Verify the installation by checking the version
-  assert_match "Ardour", shell_output("#{bin}/ardour --version")
+  test do
+    # Verify the installation by checking the version
+    assert_match "Ardour", shell_output("#{bin}/ardour --version")
+  end
 end
