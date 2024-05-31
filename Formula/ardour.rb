@@ -29,7 +29,7 @@ class Ardour < Formula
   
   def install
     # Build Ardour
-    system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
+    system "./waf", "configure", "--strict", "--prefix=#{prefix}", "--with-backends=jack,coreaudio,dummy", "--ptformat", "--optimize"
     system "./waf"
     
     # Internationalization support
