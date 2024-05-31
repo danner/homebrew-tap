@@ -26,23 +26,24 @@ class Ardour < Formula
   depends_on "lilv"
   depends_on "taglib"
   depends_on "vamp-plugin-sdk"
-
+  
   def install
-    # Clone Ardour repository is handled by `head`
-
     # Build Ardour
     system "./waf", "configure", "--prefix=#{prefix}", "--with-backends=jack"
     system "./waf"
-
+    
     # Internationalization support
     system "./waf", "i18n"
-
+    
     # Install Ardour
     system "./waf", "install", "--destdir=#{prefix}"
 
     # Create .app bundle
     cd "tools/osx_packaging" do
-      system "./osx_build", "--public"
+      # Ensure required directories exist
+      mkdir_p "#{buildpath}/source/tools/osx_packaging/Ardour8.app/Contents/Resources/media"
+      
+      system "./osx_build", "--nls", "--public"
     end
 
     # Move the .app bundle to the prefix directory
